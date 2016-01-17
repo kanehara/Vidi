@@ -30,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        initAudioRecorder();
         initRecButton();
         initStopButton();
         initPlayButton();
@@ -63,9 +62,11 @@ public class MainActivity extends AppCompatActivity {
         else {
             recButton.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
+                    initAudioRecorder();
                     try {
                         audioRecorder.prepare();
                         audioRecorder.start();
+                        playButton.setEnabled(false);
                         recButton.setEnabled(false);
                         stopButton.setEnabled(true);
                         Toast.makeText(getApplicationContext(), "Recording Started", Toast.LENGTH_SHORT).show();
